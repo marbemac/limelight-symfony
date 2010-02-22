@@ -1,0 +1,7 @@
+all:
+  limelight:
+    class: sfDoctrineDatabase
+    param:
+      dsn: 'mysql:host=localhost;dbname=limelight'
+      username: evario
+      password: sTrNMYx7tMALDfve

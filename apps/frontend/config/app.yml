@@ -1,5 +1,95 @@
-# You can find more information about this file on the symfony website:
-# http://www.symfony-project.org/reference/1_4/en/11-App
-
 # default values
-#all:
+all:
+  recaptcha:
+    public_key: 6Lc7ZQQAAAAAADCpgyeO6BbkVTQFUWEYrMb2glxm
+    private_key:  6Lc7ZQQAAAAAAJVe9Dz_zGGxqmpvLFKs2uKegq_Z
+  sf_google_analytics_plugin:
+    enabled:      true
+    profile_id:   UA-6788018-1
+    tracker:      google
+  sfApplyPlugin:
+    from:
+      email: "no-reply@techlimelight.com"
+      fullname: "Marc"
+    mailer_type: "SMTP"
+    mailer_smtp_encryption: true
+    mailer_host: smtp.gmail.com
+    mailer_port: 25
+    mailer_username: marbemac
+    mailer_password: mmacleod
+
+  site_name:              tech limelight
+
+
+  # flag_val:         minimum number of users that must flag an item before it is removed and flagged for review
+  # ms_*:             minimum score required to perform the action indicated by *
+  # mt_*:             minimum amount of days the user has been registered
+  # score_flag_val:   score at which the item will be automatically removed and flagged for review
+  # dim_val:          score at which to dim the item (because it is rated poorly)
+  # feed_num:         the number of news items to show per 'section' in feeds
+  # tag_num:          the number of tags to show
+  # procon_num:       the max number of pros/cons to show before the 'show more' button
+  # max_char_count:   the maximum number of characters to show before trimming
+  # max_edited:       the maximum number of times a user can edit the item
+  # max_length:       the maximum total length in characters
+  # max_moderated:    the maximum number of limelights a user is allowed to moderate
+
+  news:
+    image_path:             /uploads/n_stories/
+    flag_val:               10
+    ms_add:                 0
+    ms_flag:                0
+    feed_num:               20
+    feed_max_char_count:    200
+  limelight:
+    profile_path:           /uploads/ll_profile/
+    image_path:             /uploads/ll_images/
+    image_default:          /images/limelight_profile_default.gif
+    tag_num:                10
+    procon_max_length:      100
+    procon_ms_add:          0
+    procon_ms_flag:         0
+    procon_flag_val:        10
+    procon_num:             999
+    moderator_ms:           0
+    moderator_mt:           0
+    moderator_max:          8
+    moderator_max_queue:    10
+    # used in limelight head, the number of days in seconds status like new news, reviews etc should be pulled from
+    head_stat_pullback:     259200
+  reviews:
+    # the number of days in seconds a limelight can be reviewed before its release date
+    enable_user_date:       172800
+    enable_pro_date:        604800
+    title_max_length:       50
+    content_max_length:     1000
+    feed_num:               20
+    ms_add:                 0
+  user:
+    profile_image_path:     /uploads/u_profile/
+    max_change:             10
+  tag:
+    score_flag_val:         -5
+    ms_add:                 0
+    ms_flag:                0
+  comment:
+    flag_val:               10
+    child_flag_val:         10
+    ms_add:                 0
+    ms_flag:                0
+    dim_val:                -5
+    max_edited:             999
+    max_length:             2000
+  spec:
+    ms_flag:                0
+    flag_val:               10
+  wiki:
+    ms_flag:                0
+    ms_revert:              0
+    flag_val:               10
+
+  # controls how many items appear for each group on the rankings page
+  rankings:
+    user_max:              10
+    news_max:              10
+    limelight_max:         10

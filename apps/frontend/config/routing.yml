@@ -6,6 +6,10 @@ user_new:
   url:   /newUser
   param: { module: user, action: new }
 
+user_create:
+  url:  /createUser
+  param: { module: user, action: create }
+
 sf_guard_signin:
   url:   /login
   param: { module: sfGuardAuth, action: signin }

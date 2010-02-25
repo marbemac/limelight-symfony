@@ -19,35 +19,36 @@ class userActions extends sfActions {
       return $this->redirect('@homepage');
 
     $this->form = new RegisterForm();
+  }
 
-    if ($request->isMethod('post') && $request->getParameter('user'))
+  public function executeCreate(sfWebRequest $request) {
+    $this->form = new RegisterForm();
+    $this->processForm($request, $this->form);
+    $this->setTemplate('new');
+  }
+
+  public function processForm(sfWebRequest $request, sfForm $form) {
+    $captcha = array(
+      'recaptcha_challenge_field' => $request->getParameter('recaptcha_challenge_field'),
+      'recaptcha_response_field'  => $request->getParameter('recaptcha_response_field'),
+    );
+    $this->form->bind(array_merge($request->getParameter($form->getName()), array('captcha' => $captcha)));
+
+    if ($this->form->isValid())
     {
-      $this->form->bind($request->getParameter('user'));
-      $captcha = array(
-        'recaptcha_challenge_field' => $request->getParameter('recaptcha_challenge_field'),
-        'recaptcha_response_field'  => $request->getParameter('recaptcha_response_field'),
-      );
-      $this->form->bind(array_merge($request->getParameter('user'), array('captcha' => $captcha)));
+      $user = $request->getParameter('user');
+      $sfUser = new sfGuardUser();
+      $sfUser->username = $user['username'];
+      $sfUser->password = $user['password'];
+      $sfUser->Profile->email = $user['email'];
+      $sfUser->Profile->activate_code = uniqid('U');
+      $sfUser->save();
 
-      if ($this->form->isValid())
-      {
-        $user = $request->getParameter('user');
-
-        $id = uniqid('U');
-
-        $sfUser = new sfGuardUser();
-        $sfUser->username = $user['username'];
-        $sfUser->password = $user['password'];
-        $sfUser->Profile->email = $user['email'];
-        $sfUser->Profile->activate_code = $id;
-        $sfUser->save();
-
-        $request->setParameter('email', $user['email']);
-        $request->setParameter('username', $user['username']);
-        $request->setParameter('id', $id);
-
-        //$this->forward('mailer', 'validateEmail');
-      }
+      $this->redirect('@homepage');
+      //$request->setParameter('email', $user['email']);
+      //$request->setParameter('username', $user['username']);
+      //$request->setParameter('id', $id);
+      //$this->forward('mailer', 'validateEmail');
     }
   }
 }

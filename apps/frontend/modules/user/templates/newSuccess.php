@@ -1,9 +1,9 @@
-<?php use_helper('Form') ?>
+
 <div id="register_container">
   <div class="sr_head">Create a New Account</div>
   <div id="r_user_url">your personal url: techlimelight.com/<span><?php echo ($form['username']->getValue() ? $form['username']->getValue() : '?') ?></span></div>
   
-  <form action="<?php echo url_for('user_new') ?>" method="POST" id="register_form">
+  <?php echo form_tag_for($form, '@user') ?>
     <?php foreach ($form as $field): ?>
     <div class="reg_field_name">
       <?php if($field->getName() != '_csrf_token') echo $field->renderLabel(); ?>
